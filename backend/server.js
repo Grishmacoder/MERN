@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const menuRoutes = require("./routes/menu");
+const products = require("./routes/productRoutes");
+const category = require('./routes/categoryRoutes');
 
 const app = express();
 //db connection
@@ -24,4 +25,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //menu-routes
-app.use("/api/menu", menuRoutes);
+app.use("/api/products", products);
+
+//category
+app.use("/api/category", category);
