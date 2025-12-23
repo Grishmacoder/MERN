@@ -1,11 +1,27 @@
+require("dotenv").config();
 const express = require("express");
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+const menuRoutes = require("./routes/menu");
 
 const app = express();
+//db connection
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log("listening on port !!!", process.env.PORT);
+    });
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
-app.get("/", (req, res) => {
-  res.json({ msg: "welcome to the app" });
-});
+//logger
+app.use(morgan("dev"));
 
-app.listen(4000, () => {
-  console.log("listening on port 4000!!!");
-});
+//middleware
+app.use(express.json());
+
+//menu-routes
+app.use("/api/menu", menuRoutes);
