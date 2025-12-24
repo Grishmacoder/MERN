@@ -1,4 +1,3 @@
-import React from "react";
 import "./cake-details.css"
 
 const CakeDetails = ({ product }) => {

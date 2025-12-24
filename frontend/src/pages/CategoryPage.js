@@ -13,9 +13,10 @@ const CategoryPage = () => {
       const res = await fetch(
         `/api/products?category=${encodeURIComponent(category)}`
       );
-      const data = res.json();
+      const data = await res.json();
       if (res.ok) {
         setProducts(data);
+       
       }
       setLoading(false);
     };
@@ -25,7 +26,7 @@ const CategoryPage = () => {
   return (
     <div className="pages">
       <h2 className="text-primary" style={{ marginBottom: "30px" }}>
-        {category.replace("-", " ")}Cakes
+        {category.replace("-", " ")} Cakes
       </h2>
       {loading && <p>Loading cakes...</p>}
       {!loading && (

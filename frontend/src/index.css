@@ -156,13 +156,15 @@ header a:hover {
   font-weight: 500;
   color: #3b2f2f;
   cursor: pointer;
-  padding: 4px 0;
+  /* padding: 1px 0; */
   font-family: inherit;
 }
 
 .dropdown-title:hover {
   color: #e85d75;
+  
 }
+
 
 
 /* Dropdown box */
