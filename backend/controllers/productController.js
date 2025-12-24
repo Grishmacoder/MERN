@@ -1,11 +1,18 @@
 const product = require("../models/product");
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 //get all products
 exports.getCakes = async (req, res) => {
   try {
-    const cakes = await product.find().populate("category");
-    res.json(cakes);
+    const { category } = req.query;
+    let filter = {};
+    if (category) {
+      filter.category = category;
+    }
+    const cake = await product.find(filter).sort({ createdAt: -1 });
+    if (!cake) return res.status(404).json({ message: "cake not found" });
+
+    res.status(200).json(cake);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -15,8 +22,8 @@ exports.getCakes = async (req, res) => {
 exports.getCakeById = async (req, res) => {
   try {
     const id = req.params.id;
-    if(!mongoose.Types.ObjectId.isValid(id)){
-      return res.status(404).json({error: 'No such product'})
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "No such product" });
     }
     const cake = await product.findById(id).populate("category");
     if (!cake) return res.status(404).json({ message: "cake not found" });
@@ -37,21 +44,24 @@ exports.createCake = async (req, res) => {
 };
 
 //update product
-exports.updatePrice = async(req, res)=>{
-  try{
+exports.updatePrice = async (req, res) => {
+  try {
     const id = req.params.id;
-    if(!mongoose.Types.ObjectId.isValid(id)){
-      return res.status(404).json({error: 'No such product'})
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "No such product" });
     }
-    const cake = await product.findOneAndUpdate({_id: id},{
-      ...req.body
-    })
+    const cake = await product.findOneAndUpdate(
+      { _id: id },
+      {
+        ...req.body,
+      }
+    );
     if (!cake) return res.status(404).json({ message: "cake not found" });
     res.json(cake);
-  }catch(e){
-    res.json({error:e.message})
+  } catch (e) {
+    res.json({ error: e.message });
   }
-}
+};
 //delete product
 exports.deleteCake = async (req, res) => {
   try {
@@ -61,5 +71,3 @@ exports.deleteCake = async (req, res) => {
     res.status(400).json({ message: "Invalid Id" });
   }
 };
-
-

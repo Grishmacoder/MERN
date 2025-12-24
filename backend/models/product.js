@@ -15,9 +15,16 @@ const productSchema = new schema({
         type:String,
        
     },
+    description: String,
     category:{
-        type:schema.Types.ObjectId,
-        ref:"category"
+        type: String,
+        enum: [
+            "chocolate",
+            "eggless",
+            "custom",
+            "wedding"
+        ],
+        
     },
     available:{
         type:Boolean,
