@@ -1,0 +1,96 @@
+/* Main container */
+.cake-detail {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 32px;
+  background: #fffaf7; /* soft bakery background */
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 40px;
+}
+
+/* Image placeholder (future image ready) */
+.cake-image {
+  width: 100%;
+  height: 360px;
+  background: linear-gradient(135deg, #fde2e4, #fff1f2);
+  border-radius: 16px;
+  border: 2px dashed #f3b6c2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b76e79;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Cake details */
+.cake-info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cake-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #3b2f2f;
+}
+
+.cake-price {
+  font-size: 24px;
+  font-weight: 600;
+  color: #e85d75;
+}
+
+.cake-description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #5c4a4a;
+}
+
+/* Extra info (flavor, size, availability) */
+.cake-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #7a6464;
+}
+
+/* Button */
+.cake-button {
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #e85d75, #f28fa3);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  width: fit-content;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cake-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 93, 117, 0.35);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cake-detail {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .cake-image {
+    height: 280px;
+  }
+
+  .cake-title {
+    font-size: 26px;
+  }
+}

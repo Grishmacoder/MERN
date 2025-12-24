@@ -1,0 +1,74 @@
+.cake-card {
+  background: #fffaf7;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.cake-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.cake-card-image {
+  height: 200px;
+  background: linear-gradient(135deg, #fde2e4, #fff1f2);
+  border-bottom: 2px dashed #f3b6c2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b76e79;
+  font-size: 14px;
+}
+
+.cake-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cake-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3b2f2f;
+}
+
+.cake-card-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e85d75;
+}
+
+.cake-card-desc {
+  font-size: 14px;
+  color: #6a5555;
+  line-height: 1.5;
+}
+
+.cake-card-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cake-card-btn {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #e85d75, #f28fa3);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cake-card-link {
+  font-size: 14px;
+  color: #e85d75;
+  font-weight: 500;
+  text-decoration: none;
+}

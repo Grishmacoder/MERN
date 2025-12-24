@@ -1,33 +1,272 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* layout */
+/* =========================
+   Theme Variables
+========================= */
 :root {
-  --primary: rgb(218, 166, 175);
-  --error: rgb(126, 6, 6);
+  --primary: #e85d75;          /* bakery pink */
+  --primary-light: #fde2e4;    /* soft pastel */
+  --secondary-light: #fffaf7;  /* cream background */
+  --text-dark: #3b2f2f;
+  --text-muted: #6a5555;
+  --border-soft: #f3b6c2;
+  --error: #7e0606;
+}
 
+/* =========================
+   Base Reset
+========================= */
+* {
+  box-sizing: border-box;
 }
-body{
-  background-color: bisque;
+
+body {
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
+  background-color: var(--secondary-light);
+  color: var(--text-dark);
+  line-height: 1.6;
 }
-header{
-  background-color: #fff;
+
+/* =========================
+   Global Elements
+========================= */
+a {
+  text-decoration: none;
+  color: inherit;
 }
-header .container{
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================
+   Header / Navbar
+========================= */
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f1f1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-header a{
-  color: #333;
-  text-decoration: none;
+
+header a {
+  color: var(--text-dark);
+  font-weight: 500;
 }
-.pages{
+
+header a:hover {
+  color: var(--primary);
+}
+
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #f2d6dc;
+}
+
+.navbar .container {
   max-width: 1400px;
-  padding: 20px;
   margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo h1 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #e85d75;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  font-size: 15px;
+  font-weight: 500;
+  color: #3b2f2f;
+  position: relative;
+}
+
+/* Hover underline effect */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background-color: #e85d75;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #e85d75;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo h1 {
+    font-size: 22px;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+}
+/* =========================
+   Category Dropdown
+========================= */
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-title {
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3b2f2f;
+  cursor: pointer;
+  padding: 4px 0;
+  font-family: inherit;
+}
+
+.dropdown-title:hover {
+  color: #e85d75;
+}
+
+
+/* Dropdown box */
+.dropdown-menu {
+  position: absolute;
+  top: 140%;
+  left: 0;
+  background: #fffaf7;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  padding: 12px 0;
+  min-width: 220px;
+  z-index: 200;
+  animation: fadeDown 0.2s ease;
+}
+
+/* Dropdown items */
+.dropdown-menu a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 14px;
+  color: #3b2f2f;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #fde2e4;
+  color: #e85d75;
+}
+
+/* Hover underline like other links */
+.dropdown-title:hover {
+  color: #e85d75;
+}
+
+/* Small animation */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   Page Wrapper
+========================= */
+.pages {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* =========================
+   Utility Classes
+========================= */
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.error {
+  color: var(--error);
+  background: #ffecec;
+  border: 1px solid var(--error);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+/* =========================
+   Buttons (Global)
+========================= */
+.btn-primary {
+  padding: 12px 22px;
+  background: linear-gradient(135deg, var(--primary), #f28fa3);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 93, 117, 0.35);
+}
+
+/* =========================
+   Responsive Helpers
+========================= */
+@media (max-width: 768px) {
+  header .container {
+    padding: 12px 16px;
+  }
+
+  .pages {
+    padding: 16px;
+  }
 }
