@@ -1,4 +1,5 @@
 const product = require("../models/product");
+const mongoose = require('mongoose')
 
 //get all products
 exports.getCakes = async (req, res) => {
@@ -14,6 +15,9 @@ exports.getCakes = async (req, res) => {
 exports.getCakeById = async (req, res) => {
   try {
     const id = req.params.id;
+    if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).json({error: 'No such product'})
+    }
     const cake = await product.findById(id).populate("category");
     if (!cake) return res.status(404).json({ message: "cake not found" });
     res.json(cake);
@@ -32,6 +36,22 @@ exports.createCake = async (req, res) => {
   }
 };
 
+//update product
+exports.updatePrice = async(req, res)=>{
+  try{
+    const id = req.params.id;
+    if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).json({error: 'No such product'})
+    }
+    const cake = await product.findOneAndUpdate({_id: id},{
+      ...req.body
+    })
+    if (!cake) return res.status(404).json({ message: "cake not found" });
+    res.json(cake);
+  }catch(e){
+    res.json({error:e.message})
+  }
+}
 //delete product
 exports.deleteCake = async (req, res) => {
   try {
