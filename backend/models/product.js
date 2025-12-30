@@ -15,7 +15,7 @@ const productSchema = new schema({
         type:String,
        
     },
-    description: String,
+    
     category:{
         type: String,
         enum: [

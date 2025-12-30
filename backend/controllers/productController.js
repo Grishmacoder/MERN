@@ -1,5 +1,6 @@
 const product = require("../models/product");
 const mongoose = require("mongoose");
+const sharp = require("sharp");
 
 //get all products
 exports.getCakes = async (req, res) => {
@@ -36,7 +37,23 @@ exports.getCakeById = async (req, res) => {
 //create product
 exports.createCake = async (req, res) => {
   try {
-    const cake = await product.create(req.body);
+    let imageData = "";
+    if (req.file) {
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 500 })
+        .jpeg({ quality: 80 })
+        .toBuffer();
+
+      imageData = `data:${req.file.mimetype};base64,${buffer.toString(
+        "base64"
+      )}`;
+    }
+    const cakeData = {
+      ...req.body,
+      image: imageData,
+    };
+
+    const cake = await product.create(cakeData);
     res.status(201).json(cake);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -47,15 +64,26 @@ exports.createCake = async (req, res) => {
 exports.updatePrice = async (req, res) => {
   try {
     const id = req.params.id;
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ error: "No such product" });
     }
-    const cake = await product.findOneAndUpdate(
-      { _id: id },
-      {
-        ...req.body,
-      }
-    );
+    const updateData = {
+      ...req.body,
+    };
+    if (req.file) {
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 500 })
+        .jpeg({ quality: 80 })
+        .toBuffer();
+
+      updateData.image = `data:image/jpeg;base64,${buffer.toString("base64")}`;
+    }
+
+    const cake = await product.findOneAndUpdate({ _id: id }, updateData, {
+      new: true,
+    });
+
     if (!cake) return res.status(404).json({ message: "cake not found" });
     res.json(cake);
   } catch (e) {
