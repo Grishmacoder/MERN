@@ -1,19 +1,22 @@
 import { useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     name:"",
-    email:"",
-    password:"",
+    email: "",
+    password: "",
   });
-  
+  const { signup, error, isLoading } = useSignup();
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value});
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("signup data: ", formData)
+    console.log("signup data", formData)
+    await signup(formData);
   };
   return (
     <div className="auth-page">
@@ -27,7 +30,6 @@ const Signup = () => {
             name="name"
             placeholder="Full Name"
             onChange={handleChange}
-          
           />
 
           <input
@@ -46,7 +48,10 @@ const Signup = () => {
             required
           />
 
-          <button className="btn-primary">Sign Up</button>
+          <button disabled={isLoading} className="btn-primary">
+            Sign Up
+          </button>
+          {error && <div>{error}</div>}
         </form>
       </div>
     </div>
