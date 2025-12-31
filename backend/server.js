@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const products = require("./routes/productRoutes");
-const category = require('./routes/categoryRoutes');
+const users = require('./routes/userRoutes');
 const path = require('path');
 
 const app = express();
@@ -28,8 +28,7 @@ app.use(express.json());
 //menu-routes
 app.use("/api/products", products);
 
-// //images
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+//user-routes
+app.use("/api/user", users);
 
-//category
-app.use("/api/category", category);
+
