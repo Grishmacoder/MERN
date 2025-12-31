@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
 import CakeCard from "../components/CakeCard";
 import "./home.css"
+import { useAuthContext } from "../hooks/useAuthContext";
+
 const Home = () => {
   const [products, setProducts] = useState(null);
+  const {user} = useAuthContext()
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const res = await fetch("/api/products/");
+      const res = await fetch("/api/products/", {
+        headers:{
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const data = await res.json();
       if (res.ok) {
         setProducts(data);
       }
     };
-    fetchProduct();
-  }, []);
+    if(user){
+      fetchProduct();
+    }
+    
+  }, [user]);
 
   return (
     <div className="home">
