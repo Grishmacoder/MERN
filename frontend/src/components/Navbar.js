@@ -23,6 +23,8 @@ const Navbar = () => {
         </Link>
         <nav className="nav-links">
           <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
           <div className="dropdown" ref={dropdownRef}>
             <button className="dropdown-title" onClick={() => setOpen(!open)}>
               Categories

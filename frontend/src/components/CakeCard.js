@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./cake-card.css";
 
 const CakeCard = ({ product }) => {
-  console.log(product);
+ 
   return (
     <div className="cake-card">
       <div className="cake-card-image">
