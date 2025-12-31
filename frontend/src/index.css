@@ -48,6 +48,7 @@ img {
 /* =========================
    Header / Navbar
 ========================= */
+
 header {
   background-color: #ffffff;
   border-bottom: 1px solid #f1f1f1;
@@ -100,7 +101,13 @@ header a:hover {
 /* Links */
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 28px;
+}
+.nav-links > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .nav-links a {
@@ -334,4 +341,30 @@ header a:hover {
 
 .btn-primary:hover {
   background: rgb(200, 145, 155);
+}
+/* =========================
+   Logout Button (Minimal)
+========================= */
+
+.nav-links button {
+  background: none;
+  border: 1px solid var(--border-soft);
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-links button:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* Logged-in email badge (optional but subtle) */
+.nav-links span {
+  font-size: 13px;
+  color: var(--text-muted);
 }
